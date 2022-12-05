@@ -5,6 +5,11 @@ import {edit2} from 'react-icons-kit/feather/edit2'
 import {trash} from 'react-icons-kit/feather/trash'
 import { useNavigate, useLocation } from "react-router-dom";
 
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Card from 'react-bootstrap/Card';
+import './Format.css'
+
 
 //metodo para obtener tods los todos del local host
 const getTodosFromLS=()=>{
@@ -121,16 +126,16 @@ const getTodosFromLS=()=>{
     return (
         <>
          {editFormat === false && (
-             <div className="form" >
-             <h1>Welcome to TODOLIST app : {userName}</h1>       
+             <div className='col-6 d-flex align-items-stretch mb-4' >
+             <h1 class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root">Welcome to TODOLIST app : {userName}</h1>       
 
              <form autoComplete="off" onSubmit={handleSubmit}>
-               <div className="input-and-button" >
-                 <input  type='text' placeholder="Add an Item" required onChange={(e) => setvalueTo(e.target.value)} value = {valueTo}/>
-                 <div className='button'>
-                   <button type="submit">
+               <div  className="justify-content-md-center" >
+                 <TextField margin="normal" required fullWidth id="filled-basic" label="Add an Item" variant="filled" type='text' placeholder="Add an Item" required onChange={(e) => setvalueTo(e.target.value)} value = {valueTo}/>
+                 <div className={'button'}>
+                 <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} >
                      <Icon icon={plus} size={20}/>
-                   </button>
+                 </Button>
                  </div>
                </div>
              </form>
@@ -138,14 +143,15 @@ const getTodosFromLS=()=>{
          )}
 
             {editFormat === true && ( 
-             <div className="form">
+             <div className='col-4 d-flex align-items-stretch mb-3'>
+            <h1 class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root">Welcome to TODOLIST app : {userName}</h1>
              <form autoComplete="off" onSubmit={handleEditSub}>
                <div className="input-and-button">
-                 <input type='text' placeholder="Add an Item" required onChange={(e) => setvalueTo(e.target.value)} value = {valueTo}/>
+                 <TextField margin="normal" required fullWidth id="filled-basic" label="Add an Item" variant="filled" type='text' placeholder="Add an Item" required onChange={(e) => setvalueTo(e.target.value)} value = {valueTo}/>
                  <div className='button edit'>
-                   <button type="submit">
+                   <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
                     Update
-                   </button>
+                   </Button>
                  </div>
                </div>
              </form>
@@ -178,11 +184,12 @@ const getTodosFromLS=()=>{
                     )}
                     </div>
                   ))}
-                  <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <button className='delete-all' onClick={handleLogout}>Logout</button>
-                  </div>
+                  
                 </>
               )}
+              <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleLogout}>Logout</Button>
+                  </div>
           
           
         </>
