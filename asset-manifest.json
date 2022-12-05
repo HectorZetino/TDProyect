@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/TDProyect/static/css/main.4a859a53.css",
+    "main.js": "/TDProyect/static/js/main.d97614d3.js",
+    "index.html": "/TDProyect/index.html",
+    "main.4a859a53.css.map": "/TDProyect/static/css/main.4a859a53.css.map",
+    "main.d97614d3.js.map": "/TDProyect/static/js/main.d97614d3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4a859a53.css",
+    "static/js/main.d97614d3.js"
+  ]
+}
