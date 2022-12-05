@@ -44,30 +44,18 @@ export default function SignInSide({users, setUsers}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const loggedUser = JSON.parse(localStorage.getItem('users'));
-    console.log(loggedUser);
-
-
-    
-
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
     
     for (let i = 0; i < loggedUser.length; i++) {
         if(loggedUser === null){
-            console.log('Error Email or Password');
+            
         }else{
             if(loggedUser[i].email === input.email && loggedUser[i].password === input.password){
                 localStorage.setItem("loggedin",true)
-                console.log('Success');
                 navigate('/main', {state: {user: loggedUser[i].email, name:loggedUser[i].firstName}});
             }
             else{
                 
                 //alert("WrongEmail or password");
-                console.log("Wrong Email or Password");
             }
         } 
     }

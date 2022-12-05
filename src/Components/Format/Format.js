@@ -33,9 +33,6 @@ const getTodosFromLS=()=>{
     let userEmail = location.state.user;
     let userName = location.state.name;
     
-    console.log(userEmail);
-    
-    console.log(userName);
     const [valueTo, setvalueTo]=useState('');
   
     const [listTodos, setlistTodos]=useState(getTodosFromLS());
@@ -112,9 +109,9 @@ const getTodosFromLS=()=>{
 
     let valuesss = listTodos.filter(element=> element.user === userEmail)
     listUserTodos.push(valuesss);
-    console.log(valuesss);
+    
     listUserTodos.pop();
-    console.log(listUserTodos);  
+      
     useEffect(()=>{                         
       localStorage.setItem('ListTodos', JSON.stringify(listTodos));
     },[listTodos]) // useEffect will run whenever our todos state changes
