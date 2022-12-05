@@ -127,7 +127,7 @@ const getTodosFromLS=()=>{
         <>
          {editFormat === false && (
              <div className='col-6 d-flex align-items-stretch mb-4' >
-             <h1 class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root">Welcome to TODOLIST app : {userName}</h1>       
+             <h1 class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root">Welcome to TODOLIST app : {userName || "user"}</h1>       
 
              <form autoComplete="off" onSubmit={handleSubmit}>
                <div  className="justify-content-md-center" >
@@ -144,7 +144,7 @@ const getTodosFromLS=()=>{
 
             {editFormat === true && ( 
              <div className='col-4 d-flex align-items-stretch mb-3'>
-            <h1 class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root">Welcome to TODOLIST app : {userName}</h1>
+            <h1 class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root">Welcome to TODOLIST app : {userName || "user"}</h1>
              <form autoComplete="off" onSubmit={handleEditSub}>
                <div className="input-and-button">
                  <TextField margin="normal" required fullWidth id="filled-basic" label="Add an Item" variant="filled" type='text' placeholder="Add an Item" required onChange={(e) => setvalueTo(e.target.value)} value = {valueTo}/>
