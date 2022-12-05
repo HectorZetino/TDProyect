@@ -70,14 +70,14 @@ export const SignUp = ({ users, setUsers }) => {
     localStorage.setItem('users', JSON.stringify(tmpUser));
     
     setUsers( [ ...users, tmpUser ] )
-    navigate('/');
+    navigate('/TDProyect');
 
     
   };
   
   const handleLogin = (e) =>{
     e.preventDefault();
-    navigate("/")
+    navigate("/TDProyect")
   }
 
   return (

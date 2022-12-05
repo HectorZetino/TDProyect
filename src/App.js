@@ -24,7 +24,7 @@ function App() {
     <> 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignInSide users={users} setUsers={setUsers}/>}/>
+        <Route path="/TDProyect" element={<SignInSide users={users} setUsers={setUsers}/>}/>
         <Route path="/register" element={<SignUp users={users} setUsers={setUsers}/>}/>
         <Route path="/main" element={<Format users={users}/>}/>
         <Route path="/error" element={<ERROR/>}/>

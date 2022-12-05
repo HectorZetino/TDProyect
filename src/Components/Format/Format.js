@@ -26,7 +26,7 @@ const getTodosFromLS=()=>{
         userName = null;
         userEmail = null;   
         setlistUserTodos([]);     
-        navigate("/");
+        navigate("/TDProyect");
     }
     const location = useLocation();
 
