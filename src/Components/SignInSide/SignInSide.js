@@ -66,7 +66,7 @@ export default function SignInSide({users, setUsers}) {
             }
             else{
                 
-                alert("WrongEmail or password");
+                //alert("WrongEmail or password");
                 console.log("Wrong Email or Password");
             }
         } 
