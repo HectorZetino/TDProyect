@@ -3,7 +3,7 @@ import { Icon } from 'react-icons-kit'
 import {plus} from 'react-icons-kit/feather/plus'
 import {edit2} from 'react-icons-kit/feather/edit2'
 import {trash} from 'react-icons-kit/feather/trash'
-
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 //metodo para obtener tods los todos del local host
@@ -19,9 +19,28 @@ const getTodosFromLS=()=>{
   
   export const Format = () => {
   
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.setItem('loggedin',false);
+        userName = null;
+        userEmail = null;   
+        setlistUserTodos([]);     
+        navigate("/");
+    }
+    const location = useLocation();
+
+    let userEmail = location.state.user;
+    let userName = location.state.name;
+    
+    console.log(userEmail);
+    
+    console.log(userName);
     const [valueTo, setvalueTo]=useState('');
   
     const [listTodos, setlistTodos]=useState(getTodosFromLS());
+
+    const [listUserTodos, setlistUserTodos] = useState([]);
     
     const handleSubmit=(e)=>{
       e.preventDefault();
@@ -34,7 +53,7 @@ const getTodosFromLS=()=>{
         ID: time,
         TodoValue: valueTo,
         completed: false,
-        user : false
+        user : userEmail
       }
       setlistTodos([...listTodos, todoObject]);
       
@@ -46,7 +65,7 @@ const getTodosFromLS=()=>{
     const [id, setId] = useState();
 
     
-  //Eliminar de la lista
+    //Eliminar de la lista
     const handleDelete = (id) => {
         const filterValue = listTodos.filter((TodoValue) => {
             return TodoValue.ID !== id;
@@ -57,6 +76,7 @@ const getTodosFromLS=()=>{
     const handleEdit = (listTodos, index) => {
         setEditFormat(true);
         setId(index);
+        //let userCurrent = listTodos.filter(element=> element.user === userEmail)
         setvalueTo(listTodos.valueTo);
     } 
 
@@ -65,7 +85,7 @@ const getTodosFromLS=()=>{
         let items = [...listTodos];
         let item = items[id];
         item.TodoValue = valueTo;
-        // item.completed = false;
+        item.completed = false;
         items[id] = item;
         setlistTodos(items);
         setvalueTo('');
@@ -90,17 +110,26 @@ const getTodosFromLS=()=>{
         })
       }
 
+    let valuesss = listTodos.filter(element=> element.user === userEmail)
+    listUserTodos.push(valuesss);
+    console.log(valuesss);
+    listUserTodos.pop();
+    console.log(listUserTodos);  
     useEffect(()=>{                         
       localStorage.setItem('ListTodos', JSON.stringify(listTodos));
     },[listTodos]) // useEffect will run whenever our todos state changes
-  
+    
+    
+
     return (
         <>
          {editFormat === false && (
-             <div className="form">
+             <div className="form" >
+             <h1>Welcome to TODOLIST app : {userName}</h1>       
+
              <form autoComplete="off" onSubmit={handleSubmit}>
-               <div className="input-and-button">
-                 <input type='text' placeholder="Add an Item" required onChange={(e) => setvalueTo(e.target.value)} value = {valueTo}/>
+               <div className="input-and-button" >
+                 <input  type='text' placeholder="Add an Item" required onChange={(e) => setvalueTo(e.target.value)} value = {valueTo}/>
                  <div className='button'>
                    <button type="submit">
                      <Icon icon={plus} size={20}/>
@@ -125,9 +154,9 @@ const getTodosFromLS=()=>{
              </form>
            </div>
          )}
-              {listTodos.length>0&&(
+              {valuesss.length>0&&(
                 <>
-                  {listTodos.map((individualTodo,index)=>(
+                  {valuesss.map((individualTodo,index)=>(
                     <div className='todo' key={individualTodo.ID}>
 
                       {/* checkbox and value div   */}
@@ -135,7 +164,7 @@ const getTodosFromLS=()=>{
                         {editFormat===false&&(
                         <input type='checkbox' checked={individualTodo.completed} onChange={()=>handleCheckbox(individualTodo.ID)}/>
                         )}
-                        <span style={individualTodo.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>{individualTodo.TodoValue}</span>
+                        <span  style={individualTodo.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>{individualTodo.TodoValue}</span>
                       </div>
 
                       {/* edit and delete icon div */}
@@ -153,7 +182,7 @@ const getTodosFromLS=()=>{
                     </div>
                   ))}
                   <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <button className='delete-all' onClick={() => setlistTodos([])}>Delete All Todos</button>
+                    <button className='delete-all' onClick={handleLogout}>Logout</button>
                   </div>
                 </>
               )}
